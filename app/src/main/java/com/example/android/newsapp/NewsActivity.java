@@ -17,7 +17,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
+public class NewsActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<News>> {
     /**
      * URL for earthquake data from the Guardian API dataset
      */

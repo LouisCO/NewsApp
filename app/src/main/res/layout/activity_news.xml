@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="@dimen/one_dp" />
 
     <!-- Empty view is only visible when the list has no items. -->
     <TextView

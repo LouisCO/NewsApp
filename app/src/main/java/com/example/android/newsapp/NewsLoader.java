@@ -7,18 +7,20 @@ import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String url;
 
     /**
      * Constructs a new {@link NewsLoader}.
      *
      * @param context of the activity
-     * @param url to load data from
+     * @param url     to load data from
      */
     NewsLoader(Context context, String url) {
         super(context);
-        this.url = url;
+        this.url=url;
     }
 
     @Override
@@ -35,7 +37,6 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
             return null;
         }
         // Perform the network request, parse the response, and extract a list of articles.
-        List<News> articles = QueryUtils.newsFeed(url);
-        return articles;
+        return QueryUtils.newsFeed(url);
     }
 }

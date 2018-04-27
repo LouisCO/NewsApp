@@ -23,10 +23,7 @@ import java.util.List;
 
 public class NewsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
-    /**"http://content.guardianapis.com/search?from-date" +
-            "=2017-07-01&order-by=newest&show-tags=contributor&q=%22gene%20therapy%22&api-key=" +
-            "2743730f-dd10-4aa5-be32-b786f81c1780";
-     */
+
     private static final int NEWS_LOADER_ID=1;
     private NewsAdapter adapter;
     private TextView emptyStateTextView;
@@ -92,8 +89,6 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        // Create a new loader for the given URL
-        //return new NewsLoader(this, GAPI_REQUEST_URL);
 
         SharedPreferences sharedPrefs=PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -124,7 +119,6 @@ public class NewsActivity extends AppCompatActivity
                 .appendQueryParameter("from-date", fromDate)
                 .appendQueryParameter("api-key", "2743730f-dd10-4aa5-be32-b786f81c1780");
 
-        // Return the completed uri `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
         return new NewsLoader(this, uriBuilder.toString());
     }
 

@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,9 +24,14 @@ public class NewsActivity extends AppCompatActivity
     /**
      * URL for earthquake data from the Guardian API dataset
      */
-    private static final String GAPI_REQUEST_URL="http://content.guardianapis.com/search?from-date" +
+    private static final String GAPI_REQUEST_URL="http://content.guardianapis.com/search?&" +
+            "show-tags=contributor&api-key=2743730f-dd10-4aa5-be32-b786f81c1780";
+
+
+    /**"http://content.guardianapis.com/search?from-date" +
             "=2017-07-01&order-by=newest&show-tags=contributor&q=%22gene%20therapy%22&api-key=" +
             "2743730f-dd10-4aa5-be32-b786f81c1780";
+     */
     private static final int NEWS_LOADER_ID=1;
     private NewsAdapter adapter;
     private TextView emptyStateTextView;
@@ -116,4 +123,24 @@ public class NewsActivity extends AppCompatActivity
     public void onLoaderReset(Loader<List<News>> loader) {
         adapter.clear();
     }
+
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent=new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

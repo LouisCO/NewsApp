@@ -3,6 +3,20 @@
     android:title="@string/settings_title">
 
     <EditTextPreference
+        android:defaultValue=" "
+        android:inputType="text"
+        android:key="@string/settings_search_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_search_label" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_order_by_default"
+        android:entries="@array/settings_order_by_labels"
+        android:entryValues="@array/settings_order_by_values"
+        android:key="@string/settings_order_by_key"
+        android:title="@string/settings_order_by_label" />
+
+    <EditTextPreference
         android:defaultValue="@string/settings_from_date_default"
         android:inputType="date"
         android:key="@string/settings_from_date_key"

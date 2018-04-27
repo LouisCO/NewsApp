@@ -4,10 +4,12 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +23,6 @@ import java.util.List;
 
 public class NewsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
-    /**
-     * URL for earthquake data from the Guardian API dataset
-     */
-    private static final String GAPI_REQUEST_URL="http://content.guardianapis.com/search?&" +
-            "show-tags=contributor&api-key=2743730f-dd10-4aa5-be32-b786f81c1780";
-
-
     /**"http://content.guardianapis.com/search?from-date" +
             "=2017-07-01&order-by=newest&show-tags=contributor&q=%22gene%20therapy%22&api-key=" +
             "2743730f-dd10-4aa5-be32-b786f81c1780";
@@ -98,7 +93,39 @@ public class NewsActivity extends AppCompatActivity
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
-        return new NewsLoader(this, GAPI_REQUEST_URL);
+        //return new NewsLoader(this, GAPI_REQUEST_URL);
+
+        SharedPreferences sharedPrefs=PreferenceManager.getDefaultSharedPreferences(this);
+
+        // getString retrieves a String value from the preferences. The second parameter is the
+        // default value for this preference.
+        String searchContent=sharedPrefs.getString(
+                getString(R.string.settings_search_key),
+                getString(R.string.settings_search_default)
+        );
+
+        String orderBy=sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
+        String fromDate=sharedPrefs.getString(
+                getString(R.string.settings_from_date_key),
+                getString(R.string.settings_from_date_default));
+
+        Uri.Builder uriBuilder=new Uri.Builder();
+        uriBuilder.scheme("http")
+                .encodedAuthority("content.guardianapis.com")
+                .appendPath("search")
+                .appendQueryParameter("page-size", "25")
+                .appendQueryParameter("q", searchContent)
+                .appendQueryParameter("order-by", orderBy)
+                .appendQueryParameter("show-tags", "contributor")
+                .appendQueryParameter("from-date", fromDate)
+                .appendQueryParameter("api-key", "2743730f-dd10-4aa5-be32-b786f81c1780");
+
+        // Return the completed uri `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override

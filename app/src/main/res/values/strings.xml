@@ -6,7 +6,32 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
     <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings For Search Preference [CHAR LIMIT=20] -->
+    <string name="settings_search_label">Search content</string>
+    <string name="settings_search_key" translatable="false">q</string>
+    <string name="settings_search_default" translatable="false"> </string>
+
+    <!-- Strings For From-date Preference [CHAR LIMIT=20] -->
     <string name="settings_from_date_label">From Date</string>
     <string name="settings_from_date_key" translatable="false">from-date</string>
-    <string name="settings_from_date_default" translatable="true">dd/mm/yyyy</string>
+    <string name="settings_from_date_default" translatable="false">2018-01-01</string>
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=20] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order-by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
+
+    <!-- Label for order-by newest option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
+
+    <!-- Label for order-by oldest option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+    <!-- Label for order-by relevance option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+
 </resources>
